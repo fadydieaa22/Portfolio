@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-dark-bg text-gray-100 font-sans antialiased;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neon-blue rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neon-purple;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink bg-clip-text text-transparent;
+  }
+
+  .gradient-border {
+    @apply relative;
+  }
+
+  .gradient-border::before {
+    content: '';
+    @apply absolute inset-0 rounded-lg bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+    @apply -z-10 blur-sm;
+  }
+
+  .card-dark {
+    @apply bg-dark-card border border-dark-border rounded-lg p-6 transition-all duration-300;
+    @apply hover:border-neon-blue/50 hover:shadow-lg hover:shadow-neon-blue/10;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-neon-blue to-neon-purple text-white font-semibold rounded-lg;
+    @apply transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-neon-blue/50;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20;
+  }
+
+ /* Reveal animations for scrolling in */
+ .reveal-hidden { opacity: 0; transform: translateY(16px); transition: opacity 600ms ease, transform 600ms ease; }
+ .reveal-show { opacity: 1; transform: translateY(0); }
+
+  /* Loader animation */
+  @keyframes fadeIn {
+    from { opacity: 0 }
+    to { opacity: 1 }
+  }
+  .loader-fade-in { animation: fadeIn 300ms ease-out; }
+
+  /* Shimmer animation for text and progress bar */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .animate-shimmer {
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  /* Fade in up animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  /* Skill bar grow animation */
+  @keyframes skillGrow {
+    from { width: 0 }
+    to { width: var(--target) }
+  }
+  .skill-bar { animation: skillGrow 1.2s ease-out forwards; }
+
+  /* Tag chip cascade animation */
+  @keyframes chipIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .tag-chip { opacity: 0; animation: chipIn 500ms ease forwards; }
+
+  /* Reveal on scroll animations */
+  .reveal-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  .reveal-show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
