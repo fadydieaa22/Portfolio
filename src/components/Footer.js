@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiGithub, FiLinkedin, FiTwitter, FiMail, FiHeart, FiArrowUp } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiHeart, FiArrowUp } from 'react-icons/fi';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

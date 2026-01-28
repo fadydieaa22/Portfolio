@@ -1,65 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { FiGithub, FiExternalLink, FiCode, FiCheck } from "react-icons/fi";
+import Reveal from "./Reveal";
 
-const ParallaxImage = ({ src, alt, className = "", onError }) => {
-  const ref = useRef(null);
-  const [transform, setTransform] = useState("scale(1)");
-  const handleMove = (e) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5..0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    const tx = x * 15; // px
-    const ty = y * 15;
-    setTransform(`scale(1.15) translate3d(${tx}px, ${ty}px, 0)`);
-  };
-  const handleLeave = () => setTransform("scale(1)");
-  return (
-    <div
-      className="relative overflow-hidden rounded-xl"
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-    >
-      <img
-        ref={ref}
-        src={src}
-        alt={alt}
-        className={`w-full h-full object-cover transition-transform duration-500 ${className}`}
-        style={{ transform: transform }}
-        onError={onError}
-      />
-    </div>
-  );
-};
-
-const Reveal = ({ children, className = "", style }) => {
-  const ref = useRef(null);
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShown(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 },
-    );
-    obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, []);
-  return (
-    <div
-      ref={ref}
-      className={`${className} ${shown ? "reveal-show" : "reveal-hidden"}`}
-      style={style}
-    >
-      {children}
-    </div>
-  );
-};
+// Removed unused ParallaxImage component - now using simple img with zoom
 
 const Projects = () => {
   const [filter, setFilter] = useState("all");
@@ -172,7 +115,6 @@ const Projects = () => {
         {/* Featured list: image left, details right */}
         <div className="space-y-12 mb-12">
           {featuredProjects.map((project, index) => {
-            const isFirst = index === 0;
             const isEven = index % 2 === 0;
             return (
               <Reveal

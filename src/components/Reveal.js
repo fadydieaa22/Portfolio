@@ -5,6 +5,7 @@ const Reveal = ({ children, className = "", style = {} }) => {
   const ref = useRef(null);
 
   useEffect(() => {
+    const currentRef = ref.current; // Copy ref to variable for cleanup
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -14,13 +15,13 @@ const Reveal = ({ children, className = "", style = {} }) => {
       { threshold: 0.1 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

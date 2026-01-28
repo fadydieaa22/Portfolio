@@ -21,6 +21,7 @@ const Skills = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    const currentRef = sectionRef.current; // Copy ref to variable for cleanup
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -30,13 +31,13 @@ const Skills = () => {
       { threshold: 0.2 } // Trigger when 20% of the section is visible
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

@@ -65,7 +65,7 @@ const CoreStack = () => {
               <div className="grid md:grid-cols-2 gap-8 items-start">
               {/* Left: Stack Backend, Database, Dev Tools */}
               <div className="flex flex-col gap-8 order-1 md:order-none">
-                {sections.filter(s => s.title !== 'Frontend').map((s, i) => (
+                {others.map((s, i) => (
                   <div key={i} className="card-dark">
                     <h3 className={`text-2xl font-bold mb-6 bg-gradient-to-r ${s.color} bg-clip-text text-transparent`}>
                       {s.title}
